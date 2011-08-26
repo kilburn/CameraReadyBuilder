@@ -8,6 +8,7 @@ Features:
 + Full recompilation of all files to avoid skipping any recent change
 + Automatic merging of \input'ed files into a single .tex
 + Automatic inclusion of references into the .tex file
++ Automatic removal of all the comments
 + Image location and renaming to avoid nested directories
 
 ## Usage ##
@@ -19,9 +20,9 @@ Using CameraReadyBuilder is a pretty easy four-step process:
 3. Give it execution permission
 4. Run it (you can do this as many times as you want/need)
 
-Running the utility:
+Running the utility from a terminal:
 
-    cd Directory/Where/The/Sources/Are
-    chmod +x cameraReadyBuilder.sh
-    ./cameraReadyBuilder.sh
+    $ cd Directory/Where/The/Sources/Are
+    $ chmod +x cameraReadyBuilder.sh
+    $ ./cameraReadyBuilder.sh
 
