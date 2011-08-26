@@ -19,6 +19,8 @@ Using CameraReadyBuilder is a pretty easy four-step process:
 3. Give it execution permission
 4. Run it (you can do this as many times as you want/need)
 
+Running the utility:
+
     cd Directory/Where/The/Sources/Are
     chmod +x cameraReadyBuilder.sh
     ./cameraReadyBuilder.sh
