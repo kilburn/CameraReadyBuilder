@@ -13,7 +13,8 @@ OUT="OutputFile"
 INCLUDEFILES="llncs.cls"
 
 # Additional directories to include (the whole directory will be inserted
-# into the zipped archives)
+# into the zipped archives). You do not need to add any "images" folde here,
+# because images are automatically located and dealt with.
 INCLUDEDIRS=""
 
 # Archive format (either "zip", "tgz" or "bz2")
