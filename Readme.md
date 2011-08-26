@@ -15,7 +15,7 @@ Features:
 
 Using CameraReadyBuilder is a pretty easy four-step process:
 
-1. Copy the file to the folder where your paper sources are.
+1. [Download](https://github.com/kilburn/CameraReadyBuilder/raw/master/buildCameraReady.sh) and move/copy the file to the folder where your paper sources are.
 2. Edit the file, setting the configuration variables according to your needs.
 3. Give it execution permission
 4. Run it (you can do this as many times as you want/need)
