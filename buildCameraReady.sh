@@ -9,8 +9,9 @@ FILE="MasterTeXFile.tex"
 # This name *must* be different than the master file name without extension
 OUT="OutputFile"
 
-# Additional files to include in the package (such as style files)
-INCLUDEFILES="llncs.cls"
+# Additional files to include in the package (such as style files).
+#     If there are multiple files, list them separated by spaces.
+INCLUDEFILES=""
 
 # Additional directories to include (the whole directory will be inserted
 # into the zipped archives). You do not need to add any "images" folde here,
