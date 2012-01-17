@@ -30,7 +30,12 @@ rm -rf dist > /dev/null 2>&1
 mkdir build
 
 function runLatex {
-	pdflatex -halt-on-error --interaction batchmode $1 >/dev/null 2>&1 || (echo "Error." && exit)
+    pdflatex -halt-on-error -interaction=batchmode $1 >/dev/null 2>&1
+    if [ "$?" -ne "0" ]; then
+        cat ${1%.tex}.log
+        echo -en "\nFAILED!\n"
+        exit 1
+    fi
 }
 
 function parseInput {
