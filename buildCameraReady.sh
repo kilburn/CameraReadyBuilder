@@ -1,6 +1,6 @@
 #!/bin/bash +x
 
-##### CONFIGURATION VARIABLES
+##### CONFIGURATION VARIABLES
 
 # Master .tex file name
 FILE="MasterTeXFile.tex"
@@ -9,16 +9,16 @@ FILE="MasterTeXFile.tex"
 # This name *must* be different than the master file name without extension
 OUT="OutputFile"
 
-# Additional files to include in the package (such as style files).
-#     If there are multiple files, list them separated by spaces.
+# Additional files to include in the package (such as style files).
+# If there are multiple files, list them separated by spaces.
 INCLUDEFILES=""
 
 # Additional directories to include (the whole directory will be inserted
-# into the zipped archives). You do not need to add any "images" folde here,
+# into the zipped archives). You do not need to add any "images" folder here,
 # because images are automatically located and dealt with.
 INCLUDEDIRS=""
 
-# Archive format (either "zip", "tgz" or "bz2")
+# Archive format (either "zip", "tgz" or "bz2")
 ARCHIVE_FORMAT="zip"
 
 ##### SCRIPT FILE. DO NOT EDIT BELOW THIS LINE.
@@ -127,7 +127,6 @@ for img in `egrep -o '\\includegraphics[^{]*{.*}' $OUTFILE | cut -d'{' -f2 | cut
     # Copy the image
     cp ../$img$ext ./$img2$ext
 done
-
 
 if [ ! -z "$INCLUDEDIRS" ]; then
     echo "Including required directories..."
