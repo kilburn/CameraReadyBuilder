@@ -109,7 +109,8 @@ fi
 
 echo '- Fetching required images...'
 for img in `egrep -o '\\includegraphics[^{]*{.*}' $OUTFILE | cut -d'{' -f2 | cut -d'}' -f1`; do
-    if [[ ${img%.*} == ${img##*.} ]]; then
+    ext=$(echo $img | egrep -o '\.[^/\.]+$')
+    if [ -z "$ext" ]; then
         # File has no extension
         ext='.pdf'
     else
