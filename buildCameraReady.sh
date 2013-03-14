@@ -108,7 +108,7 @@ if [ ! -z "$INCLUDEFILES" ]; then
 fi
 
 echo '- Fetching required images...'
-for img in `egrep -o '\\includegraphics[^{]*{.*}' $OUTFILE | cut -d'{' -f2 | cut -d'}' -f1`; do
+for img in `egrep -o '\\includegraphics[^{]*{[^}]+}' $OUTFILE | cut -d'{' -f2 | cut -d'}' -f1`; do
     ext=$(echo $img | egrep -o '\.[^/\.]+$')
     if [ -z "$ext" ]; then
         # File has no extension
