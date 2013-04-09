@@ -42,7 +42,7 @@ function runLatex {
 }
 
 function parseInput {
-    line=$(nl -ba $1  | grep -m1 '\\input{[^}]*}')
+    line=$(nl -ba $1  | egrep -m1 '^[^%]*\\input{[^}]*}')
     numline=$(echo $line | awk '{print $1}')
     file=$(echo $line | cut -d'{' -f2 | cut -d'}' -f1)
     file="${file%.tex}"
@@ -61,9 +61,10 @@ function parseInput {
 
 # Create a single file by including the latex inputs
 cp $FILE $OUTFILE
-while `grep -q '\\input{' $OUTFILE`; do
+while `egrep -q '^[^%]*\\input{' $OUTFILE`; do
     parseInput ${OUTFILE}
 done
+
 # Cleanup comments
 echo "Cleaning up comments..."
 egrep -v '^[    ]*%' $OUTFILE | sed -E 's/([^\\])%.*/\1/g' > $OUTFILE.tmp
