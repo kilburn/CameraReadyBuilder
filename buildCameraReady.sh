@@ -113,7 +113,7 @@ fi
 
 echo '- Fetching required images...'
 for img in `egrep -o '\\includegraphics[^{]*{[^}]+}' $OUTFILE | cut -d'{' -f2 | cut -d'}' -f1`; do
-    echo "Processing image $img"
+    echo "\t Processing image $img"
     ext=$(echo $img | egrep -o '\.[^/\.]+$')
     if [ -z "$ext" ]; then
         # Include has no extension, detect the file's extension
@@ -124,7 +124,7 @@ for img in `egrep -o '\\includegraphics[^{]*{[^}]+}' $OUTFILE | cut -d'{' -f2 | 
             fi
         done
         [ ! -z "$ext" ] || ext='.pdf'
-        echo "Using image file: $img$ext"
+        echo "\tUsing image file: $img$ext"
     else
         ext=''
     fi
