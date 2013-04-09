@@ -9,6 +9,9 @@ FILE="MasterTeXFile.tex"
 # This name *must* be different than the master file name without extension
 OUT="OutputFile"
 
+# Allowed image extensions, in order of preference
+IMG_EXTENSIONS="pdf eps png jpg jpeg"
+
 # Additional files to include in the package (such as style files).
 # If there are multiple files, list them separated by spaces.
 INCLUDEFILES=""
@@ -108,11 +111,19 @@ if [ ! -z "$INCLUDEFILES" ]; then
 fi
 
 echo '- Fetching required images...'
-for img in `egrep -o '\\includegraphics[^{]*{.*}' $OUTFILE | cut -d'{' -f2 | cut -d'}' -f1`; do
+for img in `egrep -o '\\includegraphics[^{]*{[^}]+}' $OUTFILE | cut -d'{' -f2 | cut -d'}' -f1`; do
+    echo "Processing image $img"
     ext=$(echo $img | egrep -o '\.[^/\.]+$')
     if [ -z "$ext" ]; then
-        # File has no extension
-        ext='.pdf'
+        # Include has no extension, detect the file's extension
+        for cext in $IMG_EXTENSIONS; do
+            if [ -f "../$img.$cext" ]; then
+                ext=".$cext"
+                break
+            fi
+        done
+        [ ! -z "$ext" ] || ext='.pdf'
+        echo "Using image file: $img$ext"
     else
         ext=''
     fi
