@@ -84,7 +84,7 @@ if [[ "$HASBIB" -eq "0" ]]; then
 fi
 echo "- Initial compilation, final pass"
 runLatex $OUTFILE || exit 1
-rm -f $OUT.{blg,log,aux,pdf}
+rm -f $OUT.{blg,log,aux,pdf,out}
 mv $OUTFILE build/
 cd build
 
@@ -157,7 +157,7 @@ echo "- Final compilation, pass 2"
 runLatex $OUTFILE || exit 1
 
 # Cleanup
-rm $OUT.{log,aux}
+rm $OUT.{log,aux,out}
 cd ..
 find build -name '.DS_Store' -print0 | xargs -0 rm -rf
 [ -d "$OUT" ] && rm -rf $OUT
