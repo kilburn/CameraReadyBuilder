@@ -49,7 +49,7 @@ function parseInput {
     echo "Parsing input file $file..."
     totallines=$(wc -l $1 | awk '{print $1}')
     headline=$(($numline - 1))
-    tailline=$(($totallines - $numline))
+    tailline=$(($totallines - $numline + 1))
 
     # Head + input file + Tail
     head -n$headline $1 > $1.tmp
