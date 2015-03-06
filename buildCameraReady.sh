@@ -55,7 +55,7 @@ function parseInput {
     echo "Parsing input file $file..."
     totallines=$(wc -l $1 | awk '{print $1}')
     headline=$(($numline - 1))
-    tailline=$(($totallines - $numline + 1))
+    tailline=$(($totallines - $numline))
 
     # Head + input file + Tail
     head -n$headline $1 > $1.tmp
@@ -67,6 +67,8 @@ function parseInput {
 
 # Create a single file by including the latex inputs
 cp $FILE $OUTFILE
+# Add a newline to prevent errors in line counting within the parseInput function
+echo "" >> $OUTFILE
 while `egrep -q '^[^%]*\\input{' $OUTFILE`; do
     parseInput ${OUTFILE}
 done
