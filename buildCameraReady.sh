@@ -2,6 +2,10 @@
 
 ##### CONFIGURATION VARIABLES
 
+# Settings file (variables defined in this file will overwrite the values
+# shown here)
+SETTINGS="buildCameraReady.settings"
+
 # Master .tex file name
 FILE="MasterTeXFile.tex"
 
@@ -23,6 +27,8 @@ INCLUDEDIRS=""
 
 # Archive format (either "zip", "tgz" or "bz2")
 ARCHIVE_FORMAT="zip"
+
+[ -f "$SETTINGS" ] && . "$SETTINGS"
 
 ##### SCRIPT FILE. DO NOT EDIT BELOW THIS LINE.
 
