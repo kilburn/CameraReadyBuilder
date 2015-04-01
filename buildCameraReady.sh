@@ -48,11 +48,13 @@ function runLatex {
 }
 
 function parseInput {
-    line=$(nl -ba $1  | egrep -m1 '^[^%]*\\input{[^}]*}')
+    # We don't use nl because OS X's nl has a line-length limit bug (see its man page)
+    line=$(awk '{print NR,$0}' $1  | egrep -m1 '^[^%]*\\input{[^}]*}')
     numline=$(echo $line | awk '{print $1}')
     file=$(echo $line | cut -d'{' -f2 | cut -d'}' -f1)
     file="${file%.tex}"
     echo "Parsing input file $file..."
+
     totallines=$(wc -l $1 | awk '{print $1}')
     headline=$(($numline - 1))
     tailline=$(($totallines - $numline))
@@ -60,6 +62,7 @@ function parseInput {
     # Head + input file + Tail
     head -n$headline $1 > $1.tmp
     cat $file.tex >> $1.tmp
+
     echo "" >> $1.tmp
     tail -n$tailline $1 >> $1.tmp
     mv $1.tmp $1
@@ -68,7 +71,6 @@ function parseInput {
 # Create a single file by including the latex inputs
 cp $FILE $OUTFILE
 # Add a newline to prevent errors in line counting within the parseInput function
-echo "" >> $OUTFILE
 while `egrep -q '^[^%]*\\input{' $OUTFILE`; do
     parseInput ${OUTFILE}
 done
@@ -99,7 +101,8 @@ cd build
 # Replace the bibliography portion
 if [[ "$HASBIB" -eq "0" ]]; then
     echo " - Including the bibliography"
-    BIB_LINE=$(nl -ba $OUTFILE | grep '\\bibliography{' | awk '{print $1}')
+    # We don't use nl because OS X's nl has a line-length limit bug (see its man page)
+    BIB_LINE=$(awk '{print NR,$0}' $OUTFILE | grep '\\bibliography{' | awk '{print $1}')
     HEAD_LINE=$(($BIB_LINE -1))
     TOTAL_LINES=$(wc -l $OUTFILE | awk '{print $1}')
     TAIL_LINES=$(($TOTAL_LINES - $BIB_LINE))
